@@ -184,6 +184,56 @@ RemoteSensing-SemanticSegmentation/
 └── .gitignore
 ```
 
+## Experiments and Results
+
+Two training experiments were performed to study the effect of the number of training epochs.
+
+### V1 — Baseline
+
+The first experiment was trained for **2 epochs**.
+
+| Metric | Result |
+|---|---:|
+| Pixel Accuracy | 62.53% |
+| Mean IoU | 29.90% |
+
+The model did not predict classes 4 and 5 during this experiment.
+
+### V2 — Extended Training
+
+The second experiment used the same architecture and training configuration but was trained for **10 epochs**.
+
+| Metric | V1 — 2 epochs | V2 — 10 epochs |
+|---|---:|---:|
+| Pixel Accuracy | 62.53% | **70.88%** |
+| Class 0 IoU | 51.36% | **56.81%** |
+| Class 1 IoU | 35.54% | **56.57%** |
+| Class 2 IoU | 31.79% | **44.62%** |
+| Class 3 IoU | 60.73% | **64.25%** |
+| Class 4 IoU | 0.00% | **4.13%** |
+| Class 5 IoU | 0.00% | **5.86%** |
+| **Mean IoU** | **29.90%** | **38.71%** |
+
+Training for 10 epochs improved the Mean IoU from **29.90% to 38.71%**, an increase of **8.81 percentage points**.
+
+The improvement was particularly significant for class 1, whose IoU increased from **35.54% to 56.57%**.
+
+Classes 4 and 5 also started to be predicted, although their IoU remained low.
+
+These results show that the initial 2-epoch experiment was not sufficient for the model to fully learn the segmentation task.
+
+### V2 Training Curve
+
+The training and validation losses are shown below:
+
+`results/figures/training_validation_loss.png`
+
+### V2 Qualitative Result
+
+The segmentation prediction produced by the 10-epoch model is shown below:
+
+`results/figures/segmentation_prediction.png`
+
 ## Installation
 
 Clone the repository:
@@ -216,30 +266,24 @@ data/
 
 ## Usage
 
-### Train the model
+Run the complete pipeline with a single command:
 
 ```bash
-python src/train.py
+python src/run.py
 ```
 
-### Evaluate the model
+This automatically performs:
 
-```bash
-python src/evaluate.py
-```
+1. Model training
+2. Model evaluation
+3. Inference and prediction visualization
 
-This computes:
+The evaluation computes:
 
 - Pixel Accuracy
 - Confusion Matrix
 - IoU for each class
 - Mean IoU
-
-### Run inference
-
-```bash
-python src/inference.py
-```
 
 The prediction visualization is saved in:
 
