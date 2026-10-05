@@ -25,7 +25,7 @@ GT_FOLDER = os.path.join(DATA_FOLDER, "1CGT")
 WEIGHTS_PATH = os.path.join(
     PROJECT_ROOT,
     "weights",
-    "Hypercolumns_2epochs.pth"
+    "Hypercolumns_10epochs.pth"
 )
 
 

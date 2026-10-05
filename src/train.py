@@ -32,7 +32,7 @@ os.makedirs(FIGURES_FOLDER, exist_ok=True)
 
 
 BATCH_SIZE = 3
-NUMBER_EPOCHS = 2
+NUMBER_EPOCHS = 10
 LEARNING_RATE = 0.001
 
 
